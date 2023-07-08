@@ -1,12 +1,62 @@
+import 'package:app/packages/austerity/austerity.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 void main() {
+  final GlobalKey<ScaffoldState> scaffoldStateKey = GlobalKey();
+
+  final Uri austerityRoute = Uri.parse('/austerity');
+
   runApp(
-    MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Flutter Packages A-Z'),
-        ),
+    MaterialApp.router(
+      routerConfig: GoRouter(
+        debugLogDiagnostics: true,
+        routes: [
+          ShellRoute(
+            routes: [
+              GoRoute(
+                builder: (context, state) => Placeholder(),
+                path: '/',
+              ),
+              GoRoute(
+                builder: (context, state) => AusterityView(),
+                path: austerityRoute.toString(),
+              ),
+            ],
+            builder: (context, state, child) => Scaffold(
+              appBar: AppBar(
+                title: const Text('Flutter Packages A-Z'),
+                leading: IconButton(
+                  onPressed: () {
+                    (scaffoldStateKey.currentState?.isDrawerOpen ?? false)
+                        ? scaffoldStateKey.currentState?.closeDrawer()
+                        : scaffoldStateKey.currentState?.openDrawer();
+                  },
+                  icon: const Icon(Icons.home),
+                ),
+              ),
+              body: child,
+              drawer: NavigationDrawer(
+                onDestinationSelected: (value) {
+                  switch (value) {
+                    case 0:
+                      context.go(austerityRoute.toString());
+                      break;
+                    default:
+                  }
+                  scaffoldStateKey.currentState?.closeDrawer();
+                },
+                children: <Widget>[
+                  NavigationDrawerDestination(
+                    icon: Icon(Icons.home),
+                    label: Text('austerity'),
+                  ),
+                ],
+              ),
+              key: scaffoldStateKey,
+            ),
+          ),
+        ],
       ),
     ),
   );
