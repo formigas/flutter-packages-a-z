@@ -16,6 +16,7 @@ class AusterityView extends StatelessWidget {
                 PackageBadge(
                   author: 'christianfindlay.com',
                   likes: 14,
+                  link: Uri.parse('https://pub.dev/packages/austerity'),
                   name: 'austerity',
                   version: '1.1.0',
                 ),
