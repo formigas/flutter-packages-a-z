@@ -1,4 +1,5 @@
 import 'package:app/code_highlight_widget.dart';
+import 'package:app/package_badge_widget.dart';
 import 'package:flutter/material.dart';
 
 class AusterityView extends StatelessWidget {
@@ -12,6 +13,22 @@ class AusterityView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
               children: [
+                PackageBadge(
+                  author: 'christianfindlay.com',
+                  likes: 14,
+                  name: 'austerity',
+                  version: '1.1.0',
+                ),
+                const SizedBox(height: 32),
+                Text(
+                  '"You lack discipline! It\'s ok, though. This is like having discipline."',
+                  textAlign: TextAlign.center,
+                ),
+                Text(
+                  'This package basically enables all available linter rules\n(except for those that are contradicting).',
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 32),
                 CodeHighlightWidget(
                   code: '''
 dev_dependencies:

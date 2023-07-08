@@ -20,19 +20,27 @@ void main() {
               ),
               GoRoute(
                 builder: (context, state) => AusterityView(),
+                name: 'austerity',
                 path: austerityRoute.toString(),
               ),
             ],
             builder: (context, state, child) => Scaffold(
               appBar: AppBar(
-                title: const Text('Flutter Packages A-Z'),
+                title: Text((GoRouter.of(context)
+                            .routerDelegate
+                            .currentConfiguration
+                            .matches
+                            .last
+                            .route as GoRoute)
+                        .name ??
+                    'Flutter Packages A-Z'),
                 leading: IconButton(
                   onPressed: () {
                     (scaffoldStateKey.currentState?.isDrawerOpen ?? false)
                         ? scaffoldStateKey.currentState?.closeDrawer()
                         : scaffoldStateKey.currentState?.openDrawer();
                   },
-                  icon: const Icon(Icons.home),
+                  icon: const Icon(Icons.menu),
                 ),
               ),
               body: child,
